@@ -1,9 +1,10 @@
-
 # Variational Autoencoder (VAE) for Image Classification
 
 ## Introduction
 
 This project focuses on learning useful representations from *unlabelled* data for downstream tasks, specifically categorizing images into one of N categories using Variational Autoencoders (VAE). The goal is to extract meaningful representations from unlabelled images and then use these representations for classification.
+
+In this assignment, we explore how to learn meaningful representations from unlabelled image data, which can then be applied to classify images with minimal labelled examples. Our main focus is on using a Variational Autoencoder (VAE) to learn a structured latent space and a Gaussian Mixture Model (GMM) for clustering and classification.
 
 ## Problem Description
 
@@ -23,8 +24,7 @@ In this assignment, you will:
 - Use a Multilayer Perceptron (MLP) for the encoder and decoder.
 - The encoder maps a $28 \times 28$ image to a 2-dimensional latent vector.
 
-![image](https://github.com/user-attachments/assets/53c9ff16-141a-41bc-9e9d-f3e5b54ead9b)
-
+![image](https://github.com/user-attachments/assets/020adc52-d452-4d94-ba9a-f84bb28fe541)
 
 #### Loss Function
 ```python
@@ -87,9 +87,36 @@ python vae.py path_to_test_dataset test_classifier vae.pth gmm_params.pkl
 - **Reconstruction:** Evaluate the VAE using Mean Square Error and Structural Similarity Index (SSIM).
 - **Classification:** Evaluate using 'Macro' and 'Micro' F1 scores.
 
+## Validation Dataset Reconstruction
+The images reconstructed for the validation set are shown below along with the SSIM score.
+- The VAE shows good reconstruction for simpler digits like "1," with high SSIM scores (up to 0.923), but struggles with more complex digits like "4" and "8," where SSIM scores drop to as low as 0.360.
+- The average SSIM across all images is 0.694, indicating decent but imperfect reconstruction quality.
+
+![image](https://github.com/user-attachments/assets/d97566a0-eb87-4d6e-b854-00eeeffb0aeb)
+
+
+## Generative Performance of the VAE
+This visualization shows a 2D manifold learned by the VAE, mapping digits "1," "4," and "8" across a continuous latent space. The image illustrates smooth transitions between similar digits and some degree of blending between different classes.
+- The arrangement highlights the VAE's ability to capture features that connect these digits, suggesting that the model can represent distinct digit styles on a continuum.
+- However, there’s some distortion in transitioning between distinct shapes, indicating that a 2D latent space might be limiting for capturing complex variations within each digit. Increasing the latent dimensionality could potentially improve this representation by allowing for a more nuanced encoding of individual digit characteristics.
+
+![image](https://github.com/user-attachments/assets/5148127c-b904-48fd-b564-0eafa0d97374)
+
+## Visualization of the Latent Space
+- **Effectiveness of VAE:** The presence of distinct clusters suggests that the VAE has successfully organized the latent space in a way that captures the underlying structure of the data. Each digit class occupies a distinct region in the latent space, which is a desirable property for classification tasks.
+- **Quality of Clustering:** While the clusters are not perfectly separated, the separation is good enough to indicate that the VAE has learned meaningful representations of the digits. The overlap between clusters can be due to the inherent variability in the data or the complexity of the digit classes.
+
+![image](https://github.com/user-attachments/assets/f7e76888-00ee-47d3-afd4-235fcabe2fd2)
+
+## Visualization of the GMM
+- **Effectiveness of GMM:** The presence of distinct ellipses for each digit class suggests that the GMM has effectively captured the underlying structure of the latent space. Each digit class occupies a distinct region in the latent space, which is a desirable property for classification tasks.
+- **Separation of Clusters:** The ellipses are relatively well-separated, indicating that the GMM has learned to distinguish between the different digit classes in the latent space. However, there is some overlap between the clusters, particularly between the teal and yellow clusters (digits 4 and 8), which suggests that there might be some misclassification in these regions.
+
+![image](https://github.com/user-attachments/assets/5a16ca47-e71b-4b5d-a37b-c4559b20ec27)
+
+
 
 ## References
 - [Jeremy Jordan's VAE Tutorial](https://www.jeremyjordan.me/variational-autoencoders/)
 - [Understanding VAEs](https://towardsdatascience.com/intuitively-understanding-variational-autoencoders-1bfe67eb5daf)
 - [Original VAE Paper](https://arxiv.org/abs/1312.6114)
-
