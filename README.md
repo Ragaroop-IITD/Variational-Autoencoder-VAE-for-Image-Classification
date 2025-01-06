@@ -23,6 +23,9 @@ In this assignment, you will:
 - Use a Multilayer Perceptron (MLP) for the encoder and decoder.
 - The encoder maps a $28 \times 28$ image to a 2-dimensional latent vector.
 
+![image](https://github.com/user-attachments/assets/53c9ff16-141a-41bc-9e9d-f3e5b54ead9b)
+
+
 #### Loss Function
 ```python
 def loss_function(recon_x, x, mu, logvar):
