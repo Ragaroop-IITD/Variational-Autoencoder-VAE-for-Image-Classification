@@ -84,11 +84,6 @@ python vae.py path_to_test_dataset test_classifier vae.pth gmm_params.pkl
 - **Reconstruction:** Evaluate the VAE using Mean Square Error and Structural Similarity Index (SSIM).
 - **Classification:** Evaluate using 'Macro' and 'Micro' F1 scores.
 
-## Submission Guidelines
-- Upload your model to Google Drive and provide a shareable link in `model_path.txt`.
-- Submit a report in PDF format named `2020CSZ1234_2020CSZ5678.pdf`.
-- The ZIP file `submission.zip` should contain `vae.py`, `model_path.txt`, `group.txt`, and the report.
-- Adhere to the submission deadline and guidelines.
 
 ## References
 - [Jeremy Jordan's VAE Tutorial](https://www.jeremyjordan.me/variational-autoencoders/)
